@@ -12,7 +12,8 @@ ENDCLASS.
 
 
 
-CLASS zcl_ex_connection_mng IMPLEMENTATION.
+CLASS ZCL_EX_CONNECTION_MNG IMPLEMENTATION.
+
 
   METHOD if_oo_adt_classrun~main.
     data lit_connections type table of ref to lcl_connection_mng.

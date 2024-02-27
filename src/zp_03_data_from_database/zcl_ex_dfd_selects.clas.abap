@@ -12,7 +12,7 @@ ENDCLASS.
 
 
 
-CLASS zcl_ex_dfd_selects IMPLEMENTATION.
+CLASS ZCL_EX_DFD_SELECTS IMPLEMENTATION.
 
 
   METHOD if_oo_adt_classrun~main.

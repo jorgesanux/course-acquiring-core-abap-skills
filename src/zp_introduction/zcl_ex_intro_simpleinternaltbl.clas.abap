@@ -12,7 +12,7 @@ ENDCLASS.
 
 
 
-CLASS zcl_ex_intro_simpleinternaltbl IMPLEMENTATION.
+CLASS ZCL_EX_INTRO_SIMPLEINTERNALTBL IMPLEMENTATION.
 
 
   METHOD if_oo_adt_classrun~main.

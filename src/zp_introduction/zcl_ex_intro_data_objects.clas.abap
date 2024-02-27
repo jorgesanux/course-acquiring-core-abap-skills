@@ -12,7 +12,8 @@ ENDCLASS.
 
 
 
-CLASS zcl_ex_intro_data_objects IMPLEMENTATION.
+CLASS ZCL_EX_INTRO_DATA_OBJECTS IMPLEMENTATION.
+
 
   METHOD if_oo_adt_classrun~main.
     TYPES char_10 TYPE c LENGTH 10.

@@ -12,7 +12,7 @@ ENDCLASS.
 
 
 
-CLASS zcl_ex_intro_process_data IMPLEMENTATION.
+CLASS ZCL_EX_INTRO_PROCESS_DATA IMPLEMENTATION.
 
 
   METHOD if_oo_adt_classrun~main.

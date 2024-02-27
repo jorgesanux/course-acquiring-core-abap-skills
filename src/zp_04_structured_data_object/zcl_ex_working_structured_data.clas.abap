@@ -12,7 +12,7 @@ ENDCLASS.
 
 
 
-CLASS zcl_ex_working_structured_data IMPLEMENTATION.
+CLASS ZCL_EX_WORKING_STRUCTURED_DATA IMPLEMENTATION.
 
 
   METHOD if_oo_adt_classrun~main.

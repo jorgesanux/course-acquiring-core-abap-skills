@@ -11,7 +11,8 @@ CLASS zcl_ex_intro_helloworld DEFINITION
 ENDCLASS.
 
 
-CLASS zcl_ex_intro_helloworld IMPLEMENTATION.
+
+CLASS ZCL_EX_INTRO_HELLOWORLD IMPLEMENTATION.
 
 
   METHOD if_oo_adt_classrun~main.

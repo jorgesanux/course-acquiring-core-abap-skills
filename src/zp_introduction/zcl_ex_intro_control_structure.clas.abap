@@ -12,7 +12,7 @@ ENDCLASS.
 
 
 
-CLASS zcl_ex_intro_control_structure IMPLEMENTATION.
+CLASS ZCL_EX_INTRO_CONTROL_STRUCTURE IMPLEMENTATION.
 
 
   METHOD if_oo_adt_classrun~main.

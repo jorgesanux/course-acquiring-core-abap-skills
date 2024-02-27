@@ -10,7 +10,9 @@ CLASS zcl_ex_structured_data_object DEFINITION
   PRIVATE SECTION.
 ENDCLASS.
 
-CLASS zcl_ex_structured_data_object IMPLEMENTATION.
+
+
+CLASS ZCL_EX_STRUCTURED_DATA_OBJECT IMPLEMENTATION.
 
 
   METHOD if_oo_adt_classrun~main.

@@ -12,7 +12,9 @@ ENDCLASS.
 
 
 
-CLASS zcl_ex_lc_defining_local_class IMPLEMENTATION.
+CLASS ZCL_EX_LC_DEFINING_LOCAL_CLASS IMPLEMENTATION.
+
+
   METHOD if_oo_adt_classrun~main.
     DATA operation TYPE REF TO lcl_operation.
 

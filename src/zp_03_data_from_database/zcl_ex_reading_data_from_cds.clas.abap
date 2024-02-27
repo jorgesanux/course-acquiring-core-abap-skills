@@ -12,7 +12,7 @@ ENDCLASS.
 
 
 
-CLASS zcl_ex_reading_data_from_cds IMPLEMENTATION.
+CLASS ZCL_EX_READING_DATA_FROM_CDS IMPLEMENTATION.
 
 
   METHOD if_oo_adt_classrun~main.
