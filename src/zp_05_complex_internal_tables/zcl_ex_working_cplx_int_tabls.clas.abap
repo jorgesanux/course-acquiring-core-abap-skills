@@ -19,7 +19,7 @@ CLASS zcl_ex_working_cplx_int_tabls IMPLEMENTATION.
     DATA connections TYPE zt_connections.
 
     "Form to set data to a complex table
-    connections = value #(
+    connections = VALUE #(
         ( airport_from = 'EE' airport_to = 'HH' connection_id = '5' )
         ( airport_from = 'AA' airport_to = 'YY' connection_id = '6' )
         ( airport_from = 'XX' airport_to = 'BB' connection_id = '7' )
@@ -59,38 +59,81 @@ CLASS zcl_ex_working_cplx_int_tabls IMPLEMENTATION.
     out->write( name = '**connections' data = connections ).
 
     "Examples cases using corresponding with complex tables
-    types: BEGIN OF st_vehicle,
-           model type i,
-           brand type c LENGTH 10,
-           doors type i,
-    end of st_vehicle.
+    TYPES: BEGIN OF st_vehicle,
+             model TYPE i,
+             brand TYPE c LENGTH 10,
+             doors TYPE i,
+           END OF st_vehicle.
 
-    types: BEGIN OF st_car,
-           model type i,
-           brand type c LENGTH 10,
-           engine type c LENGTH 5,
-           wheels type i,
-    END OF st_car.
+    TYPES: BEGIN OF st_car,
+             model  TYPE i,
+             brand  TYPE c LENGTH 10,
+             engine TYPE c LENGTH 5,
+             wheels TYPE i,
+           END OF st_car.
 
-    types tt_vehicles type STANDARD TABLE OF st_vehicle with NON-UNIQUE KEY model brand.
-    types tt_cars type STANDARD TABLE OF st_car with NON-UNIQUE KEY model brand engine.
+    TYPES tt_vehicles TYPE STANDARD TABLE OF st_vehicle WITH NON-UNIQUE KEY model brand.
+    TYPES tt_cars TYPE STANDARD TABLE OF st_car WITH NON-UNIQUE KEY model brand engine.
 
-    data vehicles type tt_vehicles.
-    data cars type tt_cars.
+    DATA vehicles TYPE tt_vehicles.
+    DATA cars TYPE tt_cars.
 
-    vehicles = value #(
+    vehicles = VALUE #(
         ( model = 2020 brand = 'BMW' doors = 4 )
         ( model = 2015 brand = 'Mercedez' doors = 2 )
         ( model = 1999 brand = 'Lada' doors = 5 )
         ( model = 2020 brand = 'BMW' doors = 2 )
     ).
 
+    "CORRESPONDING creates the same quantity of rows, but only match the same columns (name)
     cars = CORRESPONDING #( vehicles ).
 
     out->write( name = '**vehicles' data = vehicles ).
     out->write( name = '**cars' data = cars ).
 
+    "Accessing to data from complex tables
+    DATA vehicle LIKE LINE OF vehicles.
+    vehicle = vehicles[ model = 2020 ].
 
+    out->write( name = '**vehicle' data = vehicle ).
+
+    TRY.
+        DATA counter TYPE i VALUE 0.
+        LOOP AT vehicles INTO vehicle WHERE model <> 2020.
+          counter += 1.
+          out->write( name = |**vehicle loop { counter }| data = vehicle ).
+        ENDLOOP.
+      CATCH cx_sy_itab_line_not_found INTO DATA(err).
+        out->write( |[{ err->get_text(  ) }] { err->get_longtext(  ) }| ).
+    ENDTRY.
+
+    "Modify table statement
+    DATA vehicle_modified LIKE LINE OF vehicles.
+
+    vehicle_modified = vehicles[ brand = 'BMW' doors = 4 ].
+    vehicle_modified-doors = 99.
+    MODIFY TABLE vehicles FROM vehicle_modified.
+
+    out->write( name = '**vehicle modified' data = vehicles ).
+
+    "Modify statement
+    DATA car_modified LIKE LINE OF cars.
+    car_modified = VALUE #(
+        model = 2024
+        brand = 'Renault'
+        engine = 2
+        wheels = 4
+    ).
+    MODIFY cars FROM car_modified INDEX 1.
+
+    out->write( name = '**modify car' data = cars ).
+
+    LOOP AT cars INTO DATA(car_to_modify) WHERE engine IS INITIAL.
+      car_to_modify-engine = 1.
+      MODIFY cars FROM car_to_modify.
+    ENDLOOP.
+
+    out->write( name = '**modify car loop' data = cars ).
 
   ENDMETHOD.
 ENDCLASS.
