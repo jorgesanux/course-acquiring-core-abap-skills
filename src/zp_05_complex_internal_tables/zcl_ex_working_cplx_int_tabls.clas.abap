@@ -135,5 +135,41 @@ CLASS zcl_ex_working_cplx_int_tabls IMPLEMENTATION.
 
     out->write( name = '**modify car loop' data = cars ).
 
+    "Complex tables with ABAP SQL
+    DATA us_airport_full TYPE /DMO/I_Airport.
+    SELECT SINGLE
+        AirportID,
+        Name,
+        City,
+        CountryCode
+    FROM /DMO/I_Airport AS ai
+    WHERE ai~AirportID = 'JFK'
+    INTO CORRESPONDING FIELDS OF @us_airport_full.
+
+    out->write( name = '**JFK Airport' data = us_airport_full ).
+
+    TYPES tt_aiports_full TYPE STANDARD TABLE OF /DMO/I_Airport WITH NON-UNIQUE KEY AirportID.
+    DATA deutsch_aiports_full TYPE tt_aiports_full.
+
+    SELECT
+        AirportID,
+        Name,
+        City,
+        CountryCode
+    FROM /DMO/I_Airport AS ai
+    WHERE CountryCode = 'DE'
+    INTO CORRESPONDING FIELDS OF TABLE @deutsch_aiports_full.
+
+    out->write( name = '**deutsch airports' data = deutsch_aiports_full ).
+
+    select
+        country as CountryCode,
+        countryname as CountryName
+    from I_CountryText
+    where language = 'E'
+    into table @data(countries).
+
+    out->write( name = '**countries' data = countries ).
+
   ENDMETHOD.
 ENDCLASS.
